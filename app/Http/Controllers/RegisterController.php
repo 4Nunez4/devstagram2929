@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 class RegisterController extends Controller{
 
     public function index(){
-        //dd("#Bloquiemos_a_pablo");
         return view('auth.register');
     }
     public function store(Request $request){
@@ -28,10 +27,19 @@ class RegisterController extends Controller{
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            //'password' => Hash::make($request->password)
+            'password' => $request->password
             //'password' => bcrypt($request->password)
         ]);
+        //FORMA 1 DE AUTENTICAR
+        auth()->attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
 
-        dd("Insertando los datos del formulario");
+        //FORMA 2 DE AUTENTICAR
+        //auth()->attempt($request->only('email', 'password'));
+
+        return redirect()->route('post.index');
     }
 }
