@@ -22,13 +22,13 @@ class RegisterController extends Controller{
             'email' =>'required |unique:users|email|max:60',
             'password' =>'required|confirmed|min:6'
         ]);
-
+        //insertar en la base de datos
         User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
-            //'password' => Hash::make($request->password)
             'password' => $request->password
+            //'password' => Hash::make($request->password)
             //'password' => bcrypt($request->password)
         ]);
         //FORMA 1 DE AUTENTICAR
