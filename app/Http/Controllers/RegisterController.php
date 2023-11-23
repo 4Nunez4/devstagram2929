@@ -32,13 +32,13 @@ class RegisterController extends Controller{
             //'password' => bcrypt($request->password)
         ]);
         //FORMA 1 DE AUTENTICAR
-        auth()->attempt([
+        /*auth()->attempt([
             'email' => $request->email,
             'password' => $request->password
-        ]);
+        ]);*/
 
         //FORMA 2 DE AUTENTICAR
-        //auth()->attempt($request->only('email', 'password'));
+        auth()->attempt($request->only('email', 'password'));
 
         return redirect()->route('post.index');
     }
